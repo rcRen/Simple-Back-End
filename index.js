@@ -85,15 +85,17 @@ app.delete('/users/:username', async (req, res) => {
     res.send(results)
 })
 
-//register
+//register handler
 app.post("/users/register", async (request, response) => {
     const id = request.body.id;
     const username = request.body.username;
     const password = request.body.password;
     try {
         if (
-            username && validator.isAlphanumeric(username) &&
-            password && validator.isStrongPassword(password)) {
+            username && 
+            validator.isAlphanumeric(username) && 
+            password && 
+            validator.isStrongPassword(password)) {
             // Check to see if the user already exists. If not, then create it.
             const user = await userModel.findOne({ username: username });
             if (user) {
@@ -116,7 +118,7 @@ app.post("/users/register", async (request, response) => {
     response.send({ success: false });
 });
 
-//login
+//login handler
 app.post("/users/login", async (request, response) => {
     const username = request.body.username;
     const password = request.body.password;
